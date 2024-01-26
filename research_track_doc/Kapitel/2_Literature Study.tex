@@ -1,0 +1,32 @@
+% ----------------------------------------------------------
+% ----------------------------------------------------------
+\chapter{Literature Study}
+
+We begin by presenting the task planning and surveillance algorithms and discuss about the issues, challenges, and current practices for each separately.
+
+
+% ----------------------------------------------------------
+\section{Task Planning}
+\label{sec:Task Planning}
+Task planning in robotics is very broad area where no one fits all solution exists,  many  aspects of domain, as well as  operational requirements, have effect on algorithms that are designed. In this research, we explore various common approaches to task planning as documented in literature, culminating in a novel Hybrid approach that addresses the specific challenges outlined in paper \cite{Mansouri2021Combining}.Among the many of strategies, such as Sequential Task Planning, Hierarchical Task Planning \cite{Kosak2020MapleSwarm}, Temporal Planning, Probabilistic Task Planning, and Reactive Task Planning, each has its strengths and limitations. However, in the context of a Fire bot scenario, task planning demands a more nuanced approach. Here, a dual-layered strategy becomes essential for autonomous decision-making: 1)operates at global level and decomposes the main tasks  to sub tasks to achieve overall complicated task, 2) micro level, making quick decisions in response to immediate changes in the environment or system state.
+
+Therefore, a hybrid task planner, combining elements of Hierarchical and Reactive planning, is particularly well-suited for this domain. This hybrid system effectively merges the structured decomposition of tasks at a higher level with the adaptive, responsive execution of tasks based on real-time environmental conditions and system states. 
+
+
+
+
+
+
+
+% ----------------------------------------------------------
+\section{Surveillance Algorithm}
+\label{sec:Surveillance Algorithm}
+
+While numerous studies focus on robotics and autonomous navigation, particularly in mapping unknown environments \cite{s23104766}\cite{6847303}, there is a conspicuous absence of literature specifically targeting surveillance algorithms designed for scouting purpose in dynamic and hazardous environments such as those encountered by firefighting robots.
+Existing literature predominantly addresses general mapping techniques like frontier-based exploration \cite{7276723} . However, these methodologies are not explicitly designed for the detailed and rapidly changing conditions of a patrolling task in fire surveillance scenario.The adaptability of frontier-based exploration methodologies, traditionally used for mapping unknown environments, is being reconsidered for surveillance in dynamic settings like firefighting. This shift in application addresses the lack of specialized surveillance strategies for such challenging conditions. By reworking the principles of established mapping techniques, a new, tailored algorithm is proposed to effectively meet the demands of firefighting scenarios, filling a notable gap in current research
+
+
+
+
+
+% ----------------------------------------------------------
