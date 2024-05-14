@@ -11,28 +11,16 @@ This project focuses on implementing a Full Area Coverage Path Planning (FACPP) 
 2. **TSP-Based Waypoint Optimization:** Utilizes a Traveling Salesman Problem (TSP) approach to optimize the final path connecting all waypoints, minimizing the total travel distance.
 3. **Waypoint Dropout Technique:** Implements a technique to drop waypoints strategically to accelerate the algorithm, ensuring faster processing times without compromising the coverage quality.
 
-
+## flow chart of our FACPP algorithm
 ![Flow chart HRplanner](./flow_chart.png)
 
 
 
-
----------------------------------------Surveillance Algorithm-------------------------------------
-
-
-
-
-![frontiers selected on the basis of surviellance range](./grid_maps/frontier.png)
-
-above figure demonestrates how frontiers are slected for surveillance algorithm, green is the unoccupied region and orange is the surveillance area that robot can cover from start position (estimated based on sensor range). red region is the frontier boundary (boundary that sepreats explored and unoccupied area).
-
-example on how surveillance algorithm works:
-
-let's use real time occupancy map as shown in figure
+## working of algorithm 
 
 ![occupancy map with area 101.70000000000002 sq mts ](./grid_maps/original_map.png)
 
-and table shows how this surveillance algorithm estimates goals such that surveillance area is maxmized with optimal path.
+and table shows how our FACPP algorithm estimates waypoints(goals) such that coverage/surveillance area is maxmized with optimal path.
 
 | Iteration | Goal      | Explored Area | Frontiers | CPU Execution Time (s) | GPU Execution Time (s) |
 |-----------|-----------|---------------|-----------|------------------------|------------------------|
@@ -59,7 +47,7 @@ and table shows how this surveillance algorithm estimates goals such that survei
 
 
 
-table shows within 10 iterations already explored more then 80% of toal area let's visualize graphs at each iteartion black area is explored are red dot is the selected frontier which maxmizes surveillance area from all frontiers at each iteration.
+table shows within 10 iterations already explored more then 80% of toal area let's visualize graphs at each iteartion black area is explored are red dot is the selected frontier which maxmizes surveillance/coverage area from all frontiers at each iteration.
 
 ![iteration1](./grid_maps/iteration1.png)
 ![iteration2](./grid_maps/iteration2.png)
@@ -70,14 +58,33 @@ table shows within 10 iterations already explored more then 80% of toal area let
 
 visualization of randomly selected subgraphs for 4 frontiers after 2 nd iteration 
 
-
-
-
-
 ![frontiers](./grid_maps/frontiers.png)
 
 
-WAY-POINT OPTIMIZATION:
+## Way-point optimization:
+
+
+way-point optimization technique where final path optimized such that total path is minimized and surveillance/coverage area is maxmized
+
+
+the grid map  shows path with and with  out way point optimization
+
+
+![WPO](./way_point _optimization.png)
+
+
+## Way-point dropout 
+
+Impact of way-point dropout and Line of sight (LOS) on computation time and coverage accuracy
+
+![WPD](./WPD/WPD.png)
+
+
+## qualitative comparision with ipa_coverage_path_planning(https://github.com/ipa320/ipa_coverage_planning) algorithms 
+
+![WPD](./ipa_coverage.png)
+
+** integrating in ros package, guide to run on custom grid maps, Docker implemetation **
 
 
 
@@ -85,21 +92,8 @@ WAY-POINT OPTIMIZATION:
 
 
 
-way-point optimization technique where final path optimized such that total path is minimized and surveillance area is maxmized
-
-
-the grid shows path with out optimization
 
 
 
-![withoutWPO](./grid_maps/without_wpo.png)
-
-
-
-the grid with optimization 
-
-
-
-![withWPO](./grid_maps/with_wpo.png)
 
 
