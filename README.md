@@ -11,12 +11,12 @@ This project focuses on implementing a Full Area Coverage Path Planning (FACPP) 
 2. **TSP-Based Waypoint Optimization:** Utilizes a Traveling Salesman Problem (TSP) approach to optimize the final path connecting all waypoints, minimizing the total travel distance.
 3. **Waypoint Dropout Technique:** Implements a technique to drop waypoints strategically to accelerate the algorithm, ensuring faster processing times without compromising the coverage quality.
 
-## flow chart of our FACPP algorithm
+## Flow chart of our FACPP algorithm
 ![Flow chart HRplanner](./flow_chart.png)
 
 
 
-## working of algorithm 
+## Working of algorithm 
 
 ![occupancy map with area 101.70000000000002 sq mts ](./grid_maps/original_map.png)
 
@@ -47,7 +47,7 @@ and table shows how our FACPP algorithm estimates waypoints(goals) such that cov
 
 
 
-table shows within 10 iterations already explored more then 80% of toal area let's visualize graphs at each iteartion black area is explored are red dot is the selected frontier which maxmizes surveillance/coverage area from all frontiers at each iteration.
+Table shows within 10 iterations already explored more then 80% of toal area let's visualize graphs at each iteartion black area is explored are red dot is the selected frontier which maxmizes surveillance/coverage area from all frontiers at each iteration.
 
 ![iteration1](./grid_maps/iteration1.png)
 ![iteration2](./grid_maps/iteration2.png)
@@ -56,7 +56,7 @@ table shows within 10 iterations already explored more then 80% of toal area let
 ![iteration15](./grid_maps/iteration15.png)
 ![iteration20](./grid_maps/iteration20.png)
 
-visualization of randomly selected subgraphs for 4 frontiers after 2 nd iteration 
+Visualization of randomly selected subgraphs for 4 frontiers after 2 nd iteration 
 
 ![frontiers](./grid_maps/frontiers.png)
 
@@ -64,11 +64,11 @@ visualization of randomly selected subgraphs for 4 frontiers after 2 nd iteratio
 
 
 
-## qualitative comparision with ipa_coverage_path_planning(https://github.com/ipa320/ipa_coverage_planning) algorithms 
+## Qualitative Comparision with ipa_coverage_path_planning(https://github.com/ipa320/ipa_coverage_planning) algorithms 
 
 ![IPA](./ipa_coverage.png)
 
-** integrating in ros package, guide to run on custom grid maps, Docker implemetation **
+## ** upcoming integrating in ros package, guide to run on custom grid maps, Docker implemetation **
 
 
 
