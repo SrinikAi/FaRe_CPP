@@ -1,12 +1,11 @@
-# Research documentation
+Title: Unamanned Graound vehicles: Full area coverage path planning using Vison Based Area Decompostion
+Conference: Scheduled for ICRA 2025, at USA.
+Usage:
 
-Repository for hosting research scripts and documentation (research track or Master arbeit)
-
-Research_track : Task Planning and Surveillance Algorithm For Atonomous FireBot
-
-
-Hybrid Task Planner :  1. high level planner (decomposes tasts to excutable sub tasks)
-                       2. low level planner  (reactive planner )
+step1: clone the project and install requirements.txt.
+step2: Change the PATH of occupancy grid map and map yaml.
+step3: adjust parameters like surveillance range(based on your sensor range), max iterations, way-point optimization type, way-point dropout rate.
+step4: excute surveillance.py -- cpu1 or cupm or gpu   note: cpu1 - single processing, cpum - multi processing(RECOMMENDED) , GPU
 
 ![Flow chart HRplanner](./flow_chart.png)
 
