@@ -1,4 +1,4 @@
-	** Title: Unamanned Graound vehicles: Full area coverage path planning using Vison Based Area Decompostion.	**
+	_ Title: Unamanned Graound vehicles: Full area coverage path planning using Vison Based Area Decompostion_
  Conference: Scheduled for ICRA 2025, at USA. 
 Usage:
 
