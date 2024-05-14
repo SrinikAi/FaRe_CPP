@@ -1,8 +1,7 @@
 > Title: Unamanned Graound vehicles: Full area coverage path planning using Vison Based Area Decompostion,
- Conference: Scheduled for ICRA 2025, at USA. 
-Usage:
-
-step1: clone the project and install requirements.txt.
+ Conference: Scheduled for ICRA 2025, at USA.
+> Usage:
+> step1: clone the project and install requirements.txt.
 step2: Change the PATH of occupancy grid map and map yaml.
 step3: adjust parameters like surveillance range(based on your sensor range), max iterations, way-point optimization type, way-point dropout rate.
 step4: excute `python3 surveillance.py -- cpu1 or cupm or gpu`   note: cpu1 - single processing, cpum - multi processing(RECOMMENDED) , GPU
