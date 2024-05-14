@@ -1,7 +1,15 @@
 # Unmanned Ground Vehicles: Full Area Coverage Path Planning Using Vision-Based Area Decomposition
 
 ## Conference
-Scheduled for ICRA 2025, USA.
+Scheduled for IEEE International Conference on Robotics and Automation (ICRA2025)
+
+This project focuses on implementing a Full Area Coverage Path Planning (FACPP) algorithm designed for unmanned ground vehicles. The algorithm proposes optimal waypoints that cover the maximum area with minimal travel distance, such that computer based surveillance systems can be implemented in dynamic environment.
+
+## Main Contributions
+
+1. **Greedy Heuristic Algorithm:** Proposes waypoints that maximize the coverage area, tailored to the field of view of the camera.
+2. **TSP-Based Waypoint Optimization:** Utilizes a Traveling Salesman Problem (TSP) approach to optimize the final path connecting all waypoints, minimizing the total travel distance.
+3. **Waypoint Dropout Technique:** Implements a technique to drop waypoints strategically to accelerate the algorithm, ensuring faster processing times without compromising the coverage quality.
 
 
 ![Flow chart HRplanner](./flow_chart.png)
