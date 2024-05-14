@@ -9,10 +9,15 @@ Follow these steps to set up and run the project:
 
 ### Step 1: Clone the project and install dependencies
 ```bash
-git clone [URL of your repo]
-cd [repository-name]
-pip install -r requirements.txt
+git clone https://github.com/Srinikstudent/Research_Track.git
+cd Reserach_Track/coverage_path_planning
+pip install -r Research_Track/requirements.txt
+### Step 2: excute following command
+python3 surveillance.py --cpu1  # Single processing
+python3 surveillance.py --cpum  # Multi processing (RECOMMENDED)
+python3 surveillance.py --gpu   # GPU processing
 
+'''
 ![Flow chart HRplanner](./flow_chart.png)
 
 
