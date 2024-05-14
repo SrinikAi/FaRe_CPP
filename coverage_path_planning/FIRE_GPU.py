@@ -3,13 +3,46 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import yaml
 import time
-from IPython.display import clear_output
 from scipy.spatial.distance import pdist, squareform
 from itertools import permutations
+import multiprocessing 
+from numba import jit
+# Assuming FireBotMAP and Multi_Processing modules are available in your environment.
 from FireBotMAP import Map_generator
-import multiprocessing
 from Multi_Processing import process_frontier
+
+# Initialize the map generator
 map_generator = Map_generator()
+
+@jit(nopython=True)
+def bresenhams_line_algorithm(x0, y0, x1, y1):
+    points = []
+    dx = x1 - x0
+    dy = y1 - y0
+    is_steep = abs(dy) > abs(dx)
+    if is_steep:
+        x0, y0 = y0, x0
+        x1, y1 = y1, x1
+    swapped = False
+    if x0 > x1:
+        x0, x1 = x1, x0
+        y0, y1 = y1, y0
+        swapped = True
+    dx = x1 - x0
+    dy = y1 - y0
+    error = dx / 2.0
+    ystep = 1 if y0 < y1 else -1
+    y = y0
+    for x in range(x0, x1 + 1):
+        coord = (y, x) if is_steep else (x, y)
+        points.append(coord)
+        error -= abs(dy)
+        if error < 0:
+            y += ystep
+            error += dx
+    if swapped:
+        points.reverse()
+    return points
 
 class Scout:
     def __init__(self):
@@ -22,80 +55,12 @@ class Scout:
             y = int(radius * np.sin(theta) + center[1])
             perimeter_points.add((x, y))
         return list(perimeter_points)
+
     
     def line_of_sight(self, grid_map, start, end, unoccupied_value):
-      
-        x0, y0 = start
-        x1, y1 = end
-        #print(x1,y1)
-        dx = abs(x1 - x0)
-        dy = -abs(y1 - y0)
-        sx = 1 if x0 < x1 else -1
-        sy = 1 if y0 < y1 else -1
-        err = dx + dy  
+        points = bresenhams_line_algorithm(start[0], start[1], end[0], end[1])
+        return all(grid_map[x, y] == unoccupied_value for x, y in points)
 
-        while True:
-            if x0 == x1 and y0 == y1:
-                return True
-            if grid_map[x0, y0] != unoccupied_value:
-                return False
-            e2 = 2 * err
-            if e2 >= dy:
-                err += dy
-                x0 += sx
-            if e2 <= dx:
-                err += dx
-                y0 += sy
-        return (x1,y1)
-
-    def find_frontier_cells(self, grid_map, explored_value, unexplored_value):
-        rows, cols = grid_map.shape
-        frontier_cells = []
-
-        for i in range(rows):
-            for j in range(cols):
-                
-                if grid_map[i, j] == unexplored_value:
-                    
-                    if ((i > 0 and grid_map[i-1, j] == explored_value) or
-                        (i < rows - 1 and grid_map[i+1, j] == explored_value) or
-                        (j > 0 and grid_map[i, j-1] == explored_value) or
-                        (j < cols - 1 and grid_map[i, j+1] == explored_value)):
-                        frontier_cells.append((i, j))
-        
-        return frontier_cells
-
-    
-    def increment_path_to_frontiers(self, grid_map, start_position, frontiers):
-        """Increment cells along the path from start position to each frontier cell."""
-        updated_map = np.copy(grid_map)  
-
-        for frontier in frontiers:
-            self.increment_path(updated_map, start_position, frontier)
-        
-        return updated_map
-
-    def increment_path(self, grid_map, start, end):
-        """Increment cells along the line from start to end point."""
-        x0, y0 = start
-        x1, y1 = end
-        dx = abs(x1 - x0)
-        dy = -abs(y1 - y0)
-        sx = 1 if x0 < x1 else -1
-        sy = 1 if y0 < y1 else -1
-        err = dx + dy  
-
-        while True:
-            grid_map[x0, y0] += 1 
-            if x0 == x1 and y0 == y1:
-                break
-            e2 = 2 * err
-            if e2 >= dy:
-                err += dy
-                x0 += sx
-            if e2 <= dx:
-                err += dx
-                y0 += sy
     def increment_cells_within_circle(self, grid_map, start_position, radius, unoccupied_value):
         
         
@@ -114,7 +79,22 @@ class Scout:
         return updated_map
     def is_within_circle(self, center, point, radius):
         return np.linalg.norm(np.array(center) - np.array(point)) <= radius
-    
+    def find_frontier_cells(self, grid_map, explored_value, unexplored_value):
+        rows, cols = grid_map.shape
+        frontier_cells = []
+
+        for i in range(rows):
+            for j in range(cols):
+                
+                if grid_map[i, j] == unexplored_value:
+                    
+                    if ((i > 0 and grid_map[i-1, j] == explored_value) or
+                        (i < rows - 1 and grid_map[i+1, j] == explored_value) or
+                        (j > 0 and grid_map[i, j-1] == explored_value) or
+                        (j < cols - 1 and grid_map[i, j+1] == explored_value)):
+                        frontier_cells.append((i, j))
+        
+        return frontier_cells
     
 class Exploration:
     def __init__(self, grid_map, surveillance_range, free_cells, state, yaml_data):
@@ -138,7 +118,7 @@ class Exploration:
         max_area_dict = max(results, key=lambda x: x['area'])
         selected_frontier, area, graph = max_area_dict['frontier'], max_area_dict['area'], max_area_dict['sub_graph']
         return selected_frontier, area, graph
-    def set_goals(self, current_pos, explored_value, unexplored_value,steps):
+    def set_goals(self, current_pos, explored_value, unexplored_value,steps, frontier_drop_rate):
         total_area = 0
         iteration = 0
         graph = self.grid_map
@@ -147,6 +127,8 @@ class Exploration:
         for i in range(steps):
             start_time = time.time()
             frontiers = current_pos if i == 0 else self.scout.find_frontier_cells(graph, explored_value, unexplored_value)
+            if frontier_drop_rate > 0:
+                frontiers = [item for index, item in enumerate(frontiers) if index == 0 or (index + 1) % frontier_drop_rate == 0]
             if not frontiers:
                 print("No more frontiers found. Stopping exploration.")
                 break
