@@ -61,23 +61,7 @@ visualization of randomly selected subgraphs for 4 frontiers after 2 nd iteratio
 ![frontiers](./grid_maps/frontiers.png)
 
 
-## Way-point optimization:
 
-
-way-point optimization technique where final path optimized such that total path is minimized and surveillance/coverage area is maxmized
-
-
-the grid map  shows path with and with  out way point optimization
-
-
-![frontiers](./way_point_optimization.png)
-
-
-## Way-point dropout 
-
-Impact of way-point dropout and Line of sight (LOS) on computation time and coverage accuracy
-
-![WPD](./WPD/wpd.png)
 
 
 ## qualitative comparision with ipa_coverage_path_planning(https://github.com/ipa320/ipa_coverage_planning) algorithms 
