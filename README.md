@@ -77,7 +77,7 @@ the grid map  shows path with and with  out way point optimization
 
 Impact of way-point dropout and Line of sight (LOS) on computation time and coverage accuracy
 
-![WPD](./WPD/WPD.png)
+![WPD](./WPD/wpd.png)
 
 
 ## qualitative comparision with ipa_coverage_path_planning(https://github.com/ipa320/ipa_coverage_planning) algorithms 
