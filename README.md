@@ -70,7 +70,7 @@ way-point optimization technique where final path optimized such that total path
 the grid map  shows path with and with  out way point optimization
 
 
-![WPO](./way_point _optimization.png)
+![frontiers](./way_point_optimization.png)
 
 
 ## Way-point dropout 
@@ -82,7 +82,7 @@ Impact of way-point dropout and Line of sight (LOS) on computation time and cove
 
 ## qualitative comparision with ipa_coverage_path_planning(https://github.com/ipa320/ipa_coverage_planning) algorithms 
 
-![WPD](./ipa_coverage.png)
+![IPA](./ipa_coverage.png)
 
 ** integrating in ros package, guide to run on custom grid maps, Docker implemetation **
 
