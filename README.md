@@ -1,4 +1,4 @@
-# Unmanned Ground Vehicles: Full Area Coverage Path Planning Using Vision-Based Area Decomposition
+# FaRe-CPP: Fast Revisit Coverage path Planning for Autonomous Mobile Patrol Robots Using Long-range Vision Information.
 
 ## Conference
 Scheduled for IEEE International Conference on Robotics and Automation (ICRA2025)
