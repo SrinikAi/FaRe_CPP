@@ -1,8 +1,8 @@
-from FireBotMAP import Map_generator
+from BotMAP import Map_generator
 import yaml
-from FireBotScout_Multi_Processing import Exploration
+from Scout_Multi_Processing import Exploration
 from path_generator import calculate_and_plot_path
-from FireBot_path_optimizer import WayPointOptimizer
+from path_optimizer import WayPointOptimizer
 from config import config 
 import os
 def main():
@@ -18,7 +18,7 @@ def main():
     output_dir = config['output_dir']
     pgm_filename = config['pgm_filename']
     yaml_filename = config['yaml_filename']
-
+    file_path = os.path.join(output_dir,'wp_ori_data.txt') #output file path to save optimized waypoints
     grid_map = map_generator.load_pgm(pgm_filename)
     yaml_data = map_generator.load_yaml(yaml_filename)
     
@@ -26,9 +26,9 @@ def main():
 
     #map_generator.plot_rgb_map(grid_map)
 
-    explore = Exploration(grid_map, s_range, unexplored_value, state, yaml_data)
+    explore = Exploration(grid_map, s_range, unexplored_value, state, yaml_data) #intializes the  way point generation object
 
-    goals = explore.set_goals(starting_position, explored_value, unexplored_value, steps,WPD)
+    goals = explore.set_goals(starting_position, explored_value, unexplored_value, steps,WPD) # waypoints generation returns list of waypoints(cor_x, cor_y) and orientation theta
     #map_generator.plot_iterations(goals)
     wp = []
     ori = []
@@ -44,16 +44,13 @@ def main():
         
         
         #map_generator.plot_rgb_map(graph, goal, title, frontiers =True) #save_fig = iteration )
-    file_path = os.path.join(output_dir,'wp_ori_data.txt')
-
-    # Writing to the file
+    t_c_rot = sum(ori) # total cumulative rotations
+    resolution = yaml_data['resolution'] # resolution of grid cell
+    optimizer = WayPointOptimizer(wp, 0.3, 5) # initializes waypoint optimization object
+    best_wp =optimizer.run() #optimizes waypoints
     with open(file_path, 'w') as f:
-        f.write(f"wp = {wp}\n")
+        f.write(f"wp = {best_wp}\n")
         f.write(f"ori = {ori}\n")
-    t_c_rot = sum(ori)
-    resolution = yaml_data['resolution']
-    optimizer = WayPointOptimizer(wp, 0.3, 5)
-    best_wp =optimizer.run()
     metrics = calculate_and_plot_path(grid_map,wp,best_wp,resolution,t_c_rot,output_dir)
     print(metrics)
     
