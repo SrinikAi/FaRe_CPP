@@ -1,9 +1,9 @@
-# FaRe-CPP: Fast Revisit Coverage path Planning for Autonomous Mobile Patrol Robots Using Long-range Vision Information.
-## Conference
-paper Submitted for IEEE International Conference on Robotics and Automation (ICRA2025)
+# FaRe-CPP: Fast Revisit Coverage Path Planning for Autonomous Mobile Patrol Robots Using Long-range Vision Information.
+
+## Paper Submitted for IEEE International Conference on Robotics and Automation (ICRA2025)
 
 
-steps on how to use algorithm
+Steps On How to Use Algorithm
 
   
 ```bash
