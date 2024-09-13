@@ -10,13 +10,16 @@ Steps On How to Use Algorithm
 https://github.com/Srinikstudent/FaRe_CPP.git
 
 
-cd FaRE-CPP
+cd FaRE_CPP
 
 
 pip install requirements.txt
 
 change config.py with required arguments
 
-excute  python Cpp/Surveillance.py
+chmod +x FaRe_CPP.sh
+
+./FaRe_CPP.sh
+
 
 all the results will be saved in the output directory
