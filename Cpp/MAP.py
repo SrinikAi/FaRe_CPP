@@ -1,3 +1,4 @@
+""" Handles preprocessing and plotting stuff like loading grid_map, yaml file """
 import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
